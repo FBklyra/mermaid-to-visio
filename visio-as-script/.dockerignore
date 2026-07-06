@@ -1,0 +1,10 @@
+# Keep the build context (and image) lean — exclude everything not served at runtime.
+.git
+node_modules
+scripts
+*.out
+*.log
+.DS_Store
+Dockerfile
+.dockerignore
+README.md

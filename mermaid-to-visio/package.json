@@ -1,0 +1,53 @@
+{
+  "name": "mermaid-to-visio",
+  "version": "0.1.0",
+  "description": "Convert Mermaid diagrams to native Microsoft Visio (.vsdx) files. A companion library for Mermaid: render with Mermaid, export to Visio.",
+  "type": "module",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "LICENSE",
+    "THIRD-PARTY-NOTICES.md",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean --platform neutral",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "mermaid": ">=10"
+  },
+  "peerDependenciesMeta": {
+    "mermaid": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "mermaid": "^11.4.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^2.0.0"
+  },
+  "keywords": [
+    "mermaid",
+    "visio",
+    "vsdx",
+    "diagram",
+    "svg",
+    "converter",
+    "export",
+    "opc"
+  ]
+}

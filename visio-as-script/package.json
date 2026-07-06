@@ -1,0 +1,51 @@
+{
+  "name": "@klyratech/visio-editor",
+  "version": "0.1.0",
+  "description": "Runnable, zero-dependency web editor for Mermaid → live SVG preview and one-click export to SVG, high-res PNG, or native Visio (.vsdx). Run it instantly with `npx @klyratech/visio-editor`. An extension of Mermaid; ships no copy of Mermaid.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Freddy Beltran <freddy.beltran@klyra.tech> (https://klyra.tech)",
+  "homepage": "https://github.com/FBklyra/mermaid-to-visio#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FBklyra/mermaid-to-visio.git",
+    "directory": "visio-as-script"
+  },
+  "bugs": "https://github.com/FBklyra/mermaid-to-visio/issues",
+  "bin": {
+    "visio-editor": "./server.js",
+    "visio-as-script": "./server.js"
+  },
+  "files": [
+    "server.js",
+    "public",
+    "vendor",
+    "scripts",
+    "README.md",
+    "LICENSE",
+    "THIRD-PARTY-NOTICES.md"
+  ],
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "vendor": "node scripts/vendor-extension.mjs",
+    "fetch-mermaid": "node scripts/fetch-mermaid.mjs"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mermaid",
+    "visio",
+    "vsdx",
+    "diagram",
+    "svg",
+    "editor",
+    "npx",
+    "open-source",
+    "klyra"
+  ]
+}

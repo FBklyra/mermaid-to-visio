@@ -1,0 +1,122 @@
+<!doctype html>
+<!--
+  Visio-as-Script — Mermaid diagrams to SVG / high-res PNG / native Visio (.vsdx).
+  Author: Freddy Beltran <freddy.beltran@klyra.tech>
+  Copyright (c) 2026 Freddy Beltran, Klyra (https://klyra.tech/),
+  and the Stratos platform (https://mystratos.ai/en/)
+  SPDX-License-Identifier: MIT
+
+  MIT License — see the LICENSE file. Provided "AS IS", without warranty or
+  liability of any kind; the project's DISCLAIMER.md restates and expands these
+  limitations and is referenced as part of this license notice. Works with the
+  official Mermaid engine (MIT License, (c) Knut Sveidqvist and Mermaid
+  contributors); Mermaid is NOT bundled in this repository.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Visio-as-Script — Mermaid live editor & Visio export</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext y='13' font-size='14'%3E%E2%AC%A1%3C/text%3E%3C/svg%3E"
+    />
+    <meta
+      name="description"
+      content="Paste Mermaid, see it live, download as SVG, high-res PNG, or native Visio (.vsdx). Open source."
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">⬡</span>
+        <div class="brand-text">
+          <strong>Visio-as-Script</strong>
+          <small>Mermaid live → SVG · PNG · native Visio</small>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <label class="field">
+          <span>File name</span>
+          <input id="filename" type="text" value="diagram" spellcheck="false" />
+        </label>
+
+        <label class="field">
+          <span>Theme</span>
+          <select id="theme">
+            <option value="default">default</option>
+            <option value="neutral">neutral</option>
+            <option value="dark">dark</option>
+            <option value="forest">forest</option>
+            <option value="base">base</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>PNG DPI</span>
+          <input id="dpi" type="number" min="72" max="2400" step="24" value="720" />
+        </label>
+
+        <div class="downloads">
+          <button id="dl-svg" disabled>SVG</button>
+          <button id="dl-png" disabled>PNG</button>
+          <button id="dl-vsdx" class="primary" disabled>Visio (.vsdx)</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="panes">
+      <section class="pane editor-pane">
+        <div class="pane-head">
+          <span>Mermaid source</span>
+          <span id="status" class="status">ready</span>
+        </div>
+        <textarea id="editor" spellcheck="false" autocomplete="off"></textarea>
+      </section>
+
+      <div id="splitter" class="splitter" title="Drag to resize the panes"></div>
+
+      <section class="pane preview-pane">
+        <div class="pane-head">
+          <span>Live preview</span>
+          <div class="preview-tools">
+            <button id="zoom-out" title="Zoom out" disabled>−</button>
+            <span id="zoom-level">100%</span>
+            <button id="zoom-in" title="Zoom in" disabled>+</button>
+            <button id="zoom-reset" title="Reset zoom" disabled>reset</button>
+            <button id="copy-png" title="Copy as image (paste into Word, PowerPoint, Excel, Paint…)" disabled>copy</button>
+          </div>
+        </div>
+        <div id="preview" class="preview"></div>
+      </section>
+    </main>
+
+    <footer class="statusbar">
+      <span id="stats"></span>
+      <span class="grow"></span>
+      <span class="muted"
+        >Runs entirely in your browser — your diagram never leaves this tab. Open
+        source · MIT.</span
+      >
+    </footer>
+
+    <!--
+      Mermaid is loaded from the official public CDN below. This project ships NO
+      copy of Mermaid; only the Visio-export extension is local. For an OFFLINE /
+      intranet deployment, download the official Mermaid engine (see
+      docs/USER-GUIDE.md) and change the "mermaid" entry to a local path you
+      serve, e.g. "/mermaid/mermaid.esm.min.mjs".
+    -->
+    <script type="importmap">
+      {
+        "imports": {
+          "mermaid": "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs",
+          "mermaid-to-visio": "/mermaid-to-visio/index.js"
+        }
+      }
+    </script>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

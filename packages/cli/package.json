@@ -1,0 +1,31 @@
+{
+  "name": "@klyratech/visio-cli",
+  "version": "0.1.0",
+  "description": "Headless CLI to convert Mermaid diagrams to native Visio (.vsdx), SVG, or PNG, plus an HTTP endpoint for automated pipelines. Uses the official public Mermaid (a dependency) — ships no copy of it.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Freddy Beltran <freddy.beltran@klyra.tech> (https://klyra.tech)",
+  "homepage": "https://github.com/FBklyra/mermaid-to-visio#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FBklyra/mermaid-to-visio.git",
+    "directory": "packages/cli"
+  },
+  "bugs": "https://github.com/FBklyra/mermaid-to-visio/issues",
+  "keywords": ["mermaid", "visio", "vsdx", "cli", "diagram", "headless", "automation", "klyra"],
+  "bin": {
+    "vas": "./src/cli.mjs"
+  },
+  "files": ["src", "README.md", "LICENSE"],
+  "dependencies": {
+    "@klyratech/mermaid-to-visio": "^0.1.0",
+    "mermaid": ">=10",
+    "puppeteer": "^23"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

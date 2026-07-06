@@ -1,0 +1,42 @@
+# Dependencies (installed, not committed).
+node_modules/
+
+# Mermaid is NOT distributed with this project. If you self-host the official
+# Mermaid engine for offline use (see docs), it lands in one of these locations.
+# Never commit a copy of Mermaid — it is obtained separately under its own license.
+visio-as-script/vendor/mermaid/
+visio-as-script/public/mermaid/
+visio-as-script-web/mermaid/
+mermaid/
+
+# Logs and debug output
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Local env / secrets
+.env
+.env.*
+!.env.example
+
+# Build/scratch artifacts
+*.tmp
+.cache/
+
+# Local working archives / source snapshots — never publish.
+# (In particular, never redistribute a copy of Mermaid's source here.)
+mermaid-develop-sources.zip
+mermaid-to-visio.zip
+/*.zip
+
+# Release artifacts. The ready-to-deploy web bundle (tools/build-web-package.mjs)
+# includes the official COMPILED Mermaid and is built on demand — never committed,
+# so the repository itself ships no copy of Mermaid.
+dist/

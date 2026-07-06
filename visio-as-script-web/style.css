@@ -1,0 +1,329 @@
+/*!
+ * Visio-as-Script — Mermaid diagrams to SVG / high-res PNG / native Visio (.vsdx).
+ * Author: Freddy Beltran <freddy.beltran@klyra.tech>
+ * Copyright (c) 2026 Freddy Beltran, Klyra (https://klyra.tech/),
+ * and the Stratos platform (https://mystratos.ai/en/)
+ * SPDX-License-Identifier: MIT
+ *
+ * MIT License — see the LICENSE file. Provided "AS IS", without warranty or
+ * liability of any kind; the project's DISCLAIMER.md restates and expands these
+ * limitations and is referenced as part of this license notice. Works with the
+ * official Mermaid engine (MIT License, (c) Knut Sveidqvist and Mermaid
+ * contributors); Mermaid is NOT bundled in this repository.
+ */
+:root {
+  --bg: #0f1419;
+  --panel: #161b22;
+  --panel-2: #1c2230;
+  --border: #2a3140;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --accent: #ff7a18;        /* "fuel" orange */
+  --accent-2: #ffb347;
+  --ok: #3fb950;
+  --err: #f85149;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  --mono: "SFMono-Regular", "Cascadia Code", Consolas, "Liberation Mono", Menlo,
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+}
+
+/* ---- top bar ---- */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.6rem 1rem;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.brand-mark {
+  font-size: 1.6rem;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.brand-text strong {
+  font-size: 1rem;
+  letter-spacing: 0.2px;
+}
+
+.brand-text small {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.toolbar {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.9rem;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.field input,
+.field select {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.85rem;
+  font-family: var(--font);
+}
+
+.field input#filename {
+  width: 11ch;
+}
+
+.field input#dpi {
+  width: 7ch;
+}
+
+.downloads {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.downloads button {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.05s;
+}
+
+.downloads button:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.downloads button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.downloads button.primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-color: transparent;
+  color: #1a1206;
+  font-weight: 600;
+}
+
+.downloads button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---- panes ---- */
+.panes {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(280px, 38%) 6px minmax(0, 1fr);
+  min-height: 0;
+}
+
+/* draggable divider between the editor and the live preview */
+.splitter {
+  background: var(--border);
+  cursor: col-resize;
+  transition: background 0.15s;
+}
+
+.splitter:hover,
+.splitter.dragging {
+  background: var(--accent);
+}
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+
+.editor-pane {
+  border-right: 1px solid var(--border);
+}
+
+.pane-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--muted);
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+}
+
+.status {
+  font-variant: small-caps;
+}
+
+.status.ok {
+  color: var(--ok);
+}
+
+.status.err {
+  color: var(--err);
+}
+
+#editor {
+  flex: 1;
+  resize: none;
+  border: none;
+  outline: none;
+  background: #0c1017;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding: 1rem;
+  tab-size: 2;
+}
+
+.preview-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.preview-tools button {
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 5px;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.78rem;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.preview-tools button:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.preview-tools button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#zoom-level {
+  min-width: 3.4rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.preview {
+  flex: 1;
+  overflow: auto;
+  padding: 1.2rem;
+  background: #ffffff;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  cursor: grab; /* left-drag pans the diagram */
+  user-select: none;
+}
+
+.preview.panning {
+  cursor: grabbing;
+}
+
+.preview svg {
+  max-width: 100%;
+  height: auto;
+  flex: none; /* don't let flex shrink a zoomed diagram back to the pane width */
+}
+
+.preview .render-error {
+  color: var(--err);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+  background: #2a1416;
+  border: 1px solid var(--err);
+  border-radius: 6px;
+  padding: 1rem;
+  max-width: 100%;
+}
+
+/* ---- status bar ---- */
+.statusbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.35rem 1rem;
+  font-size: 0.74rem;
+  color: var(--muted);
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+}
+
+.grow {
+  flex: 1;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+@media (max-width: 760px) {
+  .panes {
+    grid-template-columns: 1fr !important; /* wins over the splitter's inline style */
+    grid-template-rows: 1fr 1fr;
+  }
+  .splitter {
+    display: none;
+  }
+  .editor-pane {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "visio-as-script-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Mermaid live editor with native Visio (.vsdx) export, plus the architecture-from-the-conversation paradigm. Ships only the extension — Mermaid is the official public engine.",
+  "license": "MIT",
+  "author": "Klyra, AI-Enhanced Strategic Intelligence, Inc. (https://klyra.tech)",
+  "homepage": "https://github.com/FBklyra/mermaid-to-visio#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FBklyra/mermaid-to-visio.git"
+  },
+  "workspaces": [
+    "packages/*",
+    "visio-as-script"
+  ],
+  "scripts": {
+    "cli": "node packages/cli/src/cli.mjs",
+    "package:web": "node tools/build-web-package.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "mermaid": "^11.16.0"
+  }
+}

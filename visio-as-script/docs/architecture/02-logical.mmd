@@ -1,0 +1,72 @@
+%% =====================================================================
+%% TITLE BLOCK — edit the «placeholder» values below, then export.
+%%   Company  : «Company Name»
+%%   Unit     : «Unit / Department»
+%%   Title    : Logical Architecture
+%%   Version  : «0.1»
+%%   Date     : «YYYY-MM-DD»
+%% =====================================================================
+flowchart TB
+
+    %% ---- Title-block holder (first node = top-right text box) ----
+    TITLE["«COMPANY NAME»  —  «Unit / Department»<br/>Logical Architecture — Visio-as-Script<br/>Version «0.1»   •   «YYYY-MM-DD»"]
+
+    %% ---- Client tier (browser) ----
+    subgraph CLIENT["Client Tier — Web Browser (all processing client-side)"]
+        direction TB
+        UI["Editor UI<br/>(Mermaid source input)"]
+        PREV["Live SVG Preview"]
+        subgraph EXPORT["Export Module"]
+            direction TB
+            SVGX["SVG Serializer<br/>(vector)"]
+            PNGX["PNG Rasterizer<br/>(@ selectable DPI)"]
+            VSDXX["VSDX Download<br/>(native Visio)"]
+        end
+    end
+
+    %% ---- Mermaid engine (loaded into the client) ----
+    subgraph ENGINE["Mermaid Engine — ESM bundle"]
+        direction TB
+        PARSE["Parser &amp; Layout<br/>(getBBox text metrics)"]
+        RENDER["SVG Renderer"]
+        CAPTURE["SVG → Display List<br/>capture"]
+        BUILD["VSDX Package Builder<br/>(dependency-free ZIP/OPC)"]
+    end
+
+    %% ---- Delivery tier ----
+    subgraph SERVER["Delivery Tier"]
+        WEB["Static File Server<br/>(serves UI + engine)"]
+    end
+
+    %% ---- Flows ----
+    UI --> PARSE
+    PARSE --> RENDER
+    RENDER --> PREV
+    RENDER --> SVGX
+    PREV --> PNGX
+    RENDER --> CAPTURE --> BUILD --> VSDXX
+
+    WEB -. serves .-> UI
+    WEB -. serves .-> ENGINE
+
+    %% Keep the title block at the top of the canvas (invisible anchor).
+    %% Anchor to WEB: it is the graph's top-rank root (nothing feeds it), so the
+    %% title pins to the top. Anchoring to UI failed — UI is mid-ranked inside a
+    %% subgraph, which dragged the title to the middle.
+    TITLE ~~~ WEB
+
+    %% ---- Formal styling ----
+    classDef titleBlock fill:#FAFAFA,stroke:#444,stroke-width:1px,color:#111,font-size:11px;
+    classDef comp fill:#E8EEF7,stroke:#2F5597,stroke-width:1px,color:#1A2A44;
+    classDef engine fill:#FBF1E6,stroke:#B5731B,stroke-width:1px,color:#5A3A0E;
+    classDef infra fill:#ECECEC,stroke:#555,stroke-width:1px,color:#222;
+
+    class TITLE titleBlock
+    class UI,PREV,SVGX,PNGX,VSDXX comp
+    class PARSE,RENDER,CAPTURE,BUILD engine
+    class WEB infra
+
+    style CLIENT fill:#F4F6FB,stroke:#2F5597,stroke-width:1px,color:#1A2A44
+    style ENGINE fill:#FDF7EF,stroke:#B5731B,stroke-width:1px,color:#5A3A0E
+    style SERVER fill:#F3F3F3,stroke:#555,stroke-width:1px,color:#222
+    style EXPORT fill:#EEF3FA,stroke:#2F5597,stroke-width:1px,color:#1A2A44

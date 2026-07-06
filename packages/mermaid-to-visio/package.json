@@ -1,0 +1,37 @@
+{
+  "name": "@klyratech/mermaid-to-visio",
+  "version": "0.1.0",
+  "description": "Convert a Mermaid-rendered SVG into a native Microsoft Visio drawing (.vsdx) with real shapes and connectors. Diagram-type agnostic. Brings no copy of Mermaid — you supply the official engine.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Freddy Beltran <freddy.beltran@klyra.tech> (https://klyra.tech)",
+  "homepage": "https://github.com/FBklyra/mermaid-to-visio#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FBklyra/mermaid-to-visio.git",
+    "directory": "packages/mermaid-to-visio"
+  },
+  "bugs": "https://github.com/FBklyra/mermaid-to-visio/issues",
+  "keywords": ["mermaid", "visio", "vsdx", "svg", "diagram", "converter", "export", "klyra"],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": ["dist", "README.md", "LICENSE"],
+  "sideEffects": false,
+  "peerDependencies": {
+    "mermaid": ">=10"
+  },
+  "peerDependenciesMeta": {
+    "mermaid": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

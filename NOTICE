@@ -1,0 +1,37 @@
+Visio-as-Script
+Copyright (c) 2026 Freddy Beltran <freddy.beltran@klyra.tech>,
+Klyra, AI-Enhanced Strategic Intelligence, Inc. (https://klyra.tech/),
+and the Stratos platform (https://mystratos.ai/en/)
+
+Author: Freddy Beltran <freddy.beltran@klyra.tech>
+
+This product is licensed under the MIT License. See the LICENSE file.
+
+A Klyra, AI-Enhanced Strategic Intelligence, Inc. ("Klyra") open-source project.
+Klyra is a private innovation and
+applied-AI research company; mystratos.ai is among its products. Klyra publishes
+open source to share useful tools with the community and to demonstrate the
+engineering and AI standards behind its work.
+
+----------------------------------------------------------------------
+THIRD-PARTY SOFTWARE
+----------------------------------------------------------------------
+This product bundles and/or depends on third-party open-source software, each
+under its own license, including:
+
+  - Mermaid (MIT) and its dependencies (d3, dagre-d3-es, and others;
+    MIT/BSD/ISC/Apache-2.0)
+  - mermaid-to-visio (MIT) — the native Visio export library
+
+Full third-party license texts and attributions are provided in:
+  visio-as-script/THIRD-PARTY-NOTICES.md
+
+----------------------------------------------------------------------
+TRADEMARKS
+----------------------------------------------------------------------
+"Microsoft" and "Visio" are trademarks of Microsoft Corporation. "Mermaid" is the
+property of its respective owners. This project is not affiliated with, sponsored
+by, or endorsed by Microsoft, the Mermaid project, or any other third party.
+References describe interoperability and attribution only.
+
+See DISCLAIMER.md for warranty and liability information.

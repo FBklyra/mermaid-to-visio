@@ -1,0 +1,62 @@
+%% =====================================================================
+%% TITLE BLOCK — edit the «placeholder» values below, then export.
+%%   Company  : «Company Name»
+%%   Unit     : «Unit / Department»
+%%   Title    : Physical / Deployment Architecture (Azure)
+%%   Version  : «0.1»
+%%   Date     : «YYYY-MM-DD»
+%% =====================================================================
+flowchart TB
+
+    %% ---- Title-block holder (first node = top-right text box) ----
+    TITLE["«COMPANY NAME»  —  «Unit / Department»<br/>Physical / Deployment Architecture — Azure<br/>Version «0.1»   •   «YYYY-MM-DD»"]
+
+    %% ---- Corporate intranet ----
+    subgraph CORP["Corporate Intranet"]
+        DEV["User Workstation<br/>Web Browser"]
+    end
+
+    %% ---- CI / CD ----
+    subgraph CICD["Build &amp; Release"]
+        direction TB
+        REPO["Git Repository<br/>(visio-as-script)"]
+        ACRBUILD["az acr build<br/>(image build)"]
+    end
+
+    %% ---- Azure private cloud ----
+    subgraph AZURE["Microsoft Azure — Private VNet"]
+        direction TB
+        ACR["Azure Container Registry<br/>visio-as-script:latest"]
+        subgraph VNET["Virtual Network / Private Endpoint"]
+            APP["Azure Container Apps — internal env<br/>Container: node:20-alpine<br/>server.js + Visio-export extension<br/>(no Mermaid bundled) — listens :8080"]
+        end
+    end
+
+    %% ---- Official Mermaid, loaded by the browser (not bundled) ----
+    CDN["Official Mermaid<br/>public CDN (jsDelivr)<br/>or self-hosted for offline"]
+
+    %% ---- Flows ----
+    DEV -->|"HTTPS over VNet"| APP
+    DEV -.->|"loads Mermaid engine (no diagram data)"| CDN
+    REPO --> ACRBUILD --> ACR
+    ACR -->|"pull image"| APP
+
+    %% Keep the title block at the top of the canvas (invisible anchor).
+    TITLE ~~~ DEV
+
+    %% ---- Formal styling ----
+    classDef titleBlock fill:#FAFAFA,stroke:#444,stroke-width:1px,color:#111,font-size:11px;
+    classDef client fill:#E8EEF7,stroke:#2F5597,stroke-width:1px,color:#1A2A44;
+    classDef azure fill:#E6F0FB,stroke:#0072C6,stroke-width:1px,color:#0A3D62;
+    classDef cicd fill:#EFEFEF,stroke:#555,stroke-width:1px,color:#222;
+
+    class TITLE titleBlock
+    class DEV client
+    class ACR,APP azure
+    class REPO,ACRBUILD cicd
+    class CDN cicd
+
+    style CORP fill:#F4F6FB,stroke:#2F5597,stroke-width:1px,color:#1A2A44
+    style AZURE fill:#EAF2FB,stroke:#0072C6,stroke-width:1px,color:#0A3D62
+    style VNET fill:#DCEAFB,stroke:#0072C6,stroke-width:1px,color:#0A3D62
+    style CICD fill:#F3F3F3,stroke:#555,stroke-width:1px,color:#222

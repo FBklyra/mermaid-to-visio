@@ -1,0 +1,51 @@
+%% =====================================================================
+%% TITLE BLOCK — edit the «placeholder» values below, then export.
+%%   Company  : «Company Name»
+%%   Unit     : «Unit / Department»
+%%   Title    : Conceptual Architecture
+%%   Version  : «0.1»
+%%   Date     : «YYYY-MM-DD»
+%% =====================================================================
+flowchart TB
+
+    %% ---- Title-block holder (first node = top-right text box) ----
+    TITLE["«COMPANY NAME»  —  «Unit / Department»<br/>Conceptual Architecture — Visio-as-Script<br/>Version «0.1»   •   «YYYY-MM-DD»"]
+
+    %% ---- Actors ----
+    ARCH(["Enterprise &amp; Solution Architects"])
+    ENG(["Engineers &amp; Business Analysts"])
+
+    %% ---- Core capability ----
+    subgraph CAP["Diagram-as-Code Capability"]
+        direction TB
+        AUTHOR["Author diagrams<br/>as text (Mermaid)"]
+        VISUAL["Visualize<br/>instantly"]
+        PRODUCE["Produce standard<br/>deliverables"]
+    end
+
+    %% ---- Outcomes / value ----
+    STD["Standardized,<br/>version-controlled diagrams"]
+    VISIO["Native Visio<br/>deliverables"]
+    OSS["Open, shareable<br/>tooling on the intranet"]
+
+    %% ---- Relationships ----
+    ARCH --> AUTHOR
+    ENG --> AUTHOR
+    AUTHOR --> VISUAL --> PRODUCE
+    PRODUCE --> STD
+    PRODUCE --> VISIO
+    CAP --> OSS
+
+    %% Keep the title block at the top of the canvas (invisible anchor).
+    TITLE ~~~ ARCH
+
+    %% ---- Formal styling ----
+    classDef titleBlock fill:#FAFAFA,stroke:#444,stroke-width:1px,color:#111,font-size:11px;
+    classDef actor fill:#E8EEF7,stroke:#2F5597,stroke-width:1px,color:#1A2A44;
+    classDef value fill:#EAF3EA,stroke:#3C7D3C,stroke-width:1px,color:#1E3D1E;
+
+    class TITLE titleBlock
+    class ARCH,ENG actor
+    class STD,VISIO,OSS value
+
+    style CAP fill:#F4F6FB,stroke:#2F5597,stroke-width:1px,color:#1A2A44
