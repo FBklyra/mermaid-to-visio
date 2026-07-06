@@ -18,11 +18,8 @@ considerations are therefore:
 
 **Please do not open a public GitHub issue for security reports.**
 
-Instead, report privately via either:
-
-- GitHub's **private vulnerability reporting** ("Report a vulnerability" under the
-  repository's **Security** tab), or
-- email **security@klyra.tech** with the details.
+Instead, report privately via GitHub's **private vulnerability reporting**
+("Report a vulnerability" under the repository's **Security** tab).
 
 Please include: a description of the issue, steps to reproduce (a minimal Mermaid
 input or file is ideal), the impact you foresee, and any suggested remediation.
