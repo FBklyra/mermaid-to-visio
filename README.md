@@ -1,5 +1,9 @@
 # Visio-as-Script
 
+[![npm version](https://img.shields.io/npm/v/@klyratech/visio-editor)](https://www.npmjs.com/package/@klyratech/visio-editor)
+[![license](https://img.shields.io/badge/license-MIT-informational)](LICENSE)
+[![runs in the browser](https://img.shields.io/badge/runs-100%25%20client--side-success)](#-fast-track--use-it-in-minutes-no-source-no-reading-no-compiling)
+
 **A Mermaid live editor that exports to native, editable Microsoft Visio
 (`.vsdx`)** — real shapes and connectors, not an embedded image. It also exports
 **SVG** and **high-res PNG**. Everything runs **client-side in the browser**; your
